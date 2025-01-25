@@ -185,33 +185,11 @@ void send_file(int client_socket, const char *file_path, int is_head)
 
     close(fd);
 }
-
-// Determine content type based on file extension
-const char *get_content_type(const char *path)
-{
-    if(strstr(path, ".html"))
-    {
-        return CONTENT_TYPE_HTML;
+const char *get_content_type(const char *path) {
+    for (int i = 0; mime_types[i].extension != NULL; i++) {
+        if (strstr(path, mime_types[i].extension)) {
+            return mime_types[i].mime_type;
+        }
     }
-    if(strstr(path, ".css"))
-    {
-        return CONTENT_TYPE_CSS;
-    }
-    if(strstr(path, ".js"))
-    {
-        return CONTENT_TYPE_JS;
-    }
-    if(strstr(path, ".png"))
-    {
-        return CONTENT_TYPE_PNG;
-    }
-    if(strstr(path, ".jpg") || strstr(path, ".jpeg"))
-    {
-        return CONTENT_TYPE_JPG;
-    }
-    if(strstr(path, ".gif"))
-    {
-        return CONTENT_TYPE_GIF;
-    }
-    return CONTENT_TYPE_TEXT;
+    return "text/plain";
 }
