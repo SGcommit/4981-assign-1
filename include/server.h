@@ -50,9 +50,10 @@ static const MimeType mime_types[] = {
 };
 // Function Prototypes
 int         start_server(void);
+
+void send_status_response(int client_socket, const HttpStatus *status, const char *content_type, const char *body);
 void        handle_client(int client_socket);
-void        process_request(int client_socket, const char *request);
-void        send_response(int client_socket, const char *status, const char *content_type, const char *body, int body_length);
+void parse_request(const char *request, char *method, char *path, char *protocol);
 void        send_file(int client_socket, const char *file_path, int is_head);
 const char *get_content_type(const char *path);
 
