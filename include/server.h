@@ -22,38 +22,40 @@
 #define PROTOCOL_SIZE 16
 
 // Struct for HTTP Status
-typedef struct {
+typedef struct
+{
     const char *code;
     const char *message;
 } HttpStatus;
 
-static const HttpStatus HTTP_STATUS_OK = { "200", "OK" };
-static const HttpStatus HTTP_STATUS_NOT_FOUND = { "404", "Not Found" };
-static const HttpStatus HTTP_STATUS_METHOD_NOT_ALLOWED = { "405", "Method Not Allowed" };
-static const HttpStatus HTTP_STATUS_VERSION_NOT_SUPPORTED = { "505", "HTTP Version Not Supported" };
+static const HttpStatus HTTP_STATUS_OK                    = {"200", "OK"};
+static const HttpStatus HTTP_STATUS_NOT_FOUND             = {"404", "Not Found"};
+static const HttpStatus HTTP_STATUS_METHOD_NOT_ALLOWED    = {"405", "Method Not Allowed"};
+static const HttpStatus HTTP_STATUS_VERSION_NOT_SUPPORTED = {"505", "HTTP Version Not Supported"};
 
 // Struct for MIME Types
-typedef struct {
+typedef struct
+{
     const char *extension;
     const char *mime_type;
 } MimeType;
 
 static const MimeType mime_types[] = {
-    { ".html", "text/html" },
-    { ".css", "text/css" },
-    { ".js", "application/javascript" },
-    { ".png", "image/png" },
-    { ".jpg", "image/jpeg" },
-    { ".jpeg", "image/jpeg" },
-    { ".gif", "image/gif" },
-    { NULL, "text/plain" }
+    {".html", "text/html"             },
+    {".css",  "text/css"              },
+    {".js",   "application/javascript"},
+    {".png",  "image/png"             },
+    {".jpg",  "image/jpeg"            },
+    {".jpeg", "image/jpeg"            },
+    {".gif",  "image/gif"             },
+    {NULL,    "text/plain"            }
 };
 // Function Prototypes
-int         start_server(void);
+int start_server(void);
 
-void send_status_response(int client_socket, const HttpStatus *status, const char *content_type, const char *body);
+void        send_status_response(int client_socket, const HttpStatus *status, const char *content_type, const char *body);
 void        handle_client(int client_socket);
-void parse_request(const char *request, char *method, char *path, char *protocol);
+void        parse_request(const char *request, char *method, char *path, char *protocol);
 void        send_file(int client_socket, const char *file_path, int is_head);
 const char *get_content_type(const char *path);
 

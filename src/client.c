@@ -7,7 +7,7 @@
 #define SERVER_IP "127.0.0.1"    // Change this if testing on a different machine
 #define SERVER_PORT 8080         // Make sure this matches your server's port
 #define BUFFER_SIZE 1024         // Buffer size for sending and receiving data
-#define REQUEST_FORMAT "GET / HTTP/1.1\r\nHost: %s\r\n\r\n"
+#define REQUEST_FORMAT "GET / HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n"
 
 int main(void)
 {
